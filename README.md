@@ -6,7 +6,7 @@ Project Plan
 This list of milestones in the project:
 1. Get the robot finate state machine running in order to pass the grading file (completed before March 17th)
 1. Add a cordinate system to the robot structure (completed before March 20th)
-1. Research what visualization tools exist for c++ (completed before March 17th) 
+2. Research what visualization tools exist for c++ (completed March 15th) 
 1. Impliment visualization tool into the program (completed before March 20th)
 1. Add simulations of the recharge state and alarm state (completed before March 22nd)
 1. Complete API documentation (completed before March 22nd)
