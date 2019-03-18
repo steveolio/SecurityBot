@@ -5,11 +5,12 @@ A robot finite state machine built from the elma libraries found [here](https://
 Project Plan
 ===
 This list of milestones in the project:
-- [ ] Get the robot finate state machine running in order to pass the grading file (due: March 17th---completed: ???)
+- [x] Get the robot finate state machine running in order to pass the grading file (due: March 17th---completed: March 17th)
 - [x] Update the README.md file to include installation instructions (due: March 17th---completed: March 17th)
-- [ ] Add a cordinate system to the robot structure  (due: March 20th---completed: ???)
+- [ ] Add a coordinate system to the robot structure  (due: March 20th---completed: ???)
 - [x] Research what visualization tools exist for c++ (due: March 17th---completed: March 15th) 
-- [ ] Impliment visualization tool into the program (due: March 20th---completed: ???)
+- [x] Impliment UI tool into the program (due: March 20th---completed: March 17th)
+- [ ] Impliment visualization of coordinate system into the program (due: March 20th---completed: ???)
 - [ ] Add simulations of the recharge state and alarm state (due: March 22nd---completed: ???)
 - [ ] Complete API documentation (due: March 22nd---completed: ???)
 - [ ] Create a docs page in GitHub (due: March 22nd---completed: ???)
