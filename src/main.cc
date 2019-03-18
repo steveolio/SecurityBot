@@ -3,20 +3,20 @@
 #include <vector>
 #include <ncurses.h>
 
-#include "stopwatch.h"
+#include "securitybot.h"
 
 using namespace std::chrono;
 using namespace elma;
-using namespace stopwatch;
+using namespace securitybot;
 
 int main() {
 
     Manager m;
-    StopWatch stopwatch;
-    UserInterface ui(stopwatch);
+    SecurityBot securitybot;
+    UserInterface ui(securitybot);
 
     m.schedule(ui, 10_ms)
-     .schedule(stopwatch, 10_ms)     
+     .schedule(securitybot, 10_ms)     
      .init()
      .run();
 

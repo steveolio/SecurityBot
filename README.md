@@ -63,10 +63,28 @@ docker run -v /c/workingDIRECTORY/SecurityBot:/source -it klavins/elma:latest ba
 It is not recommended to install Elma without using Docker.  If you desire to do so anyway, you can view instructions [here](https://github.com/klavinslab/elma/blob/master/README.md#manual-installation)
 
 
-# Usage
-ADD EXAMPLES OF USSAGE HERE
+# Detailed System Description
+SecurityBot is a statemachine that models the following diagram:
 
-~~See the examples in the `examples` directory for how to build new event loops with Elma.~~
+    <img src="images/robot.png" width="620"></image>
+
+    Please define this code as a class called `Robot` in `homework/robot.h` (optionally `robot.cc` if you want). You will need to inherit a State and StateMachine classes. Your new State class used to hold robot states is should only internally be `Robot`, so it does not matter what it is named. Initialization of a `Robot` should initialize all of the states and transitions. You should be able to initialize your robot via the following:
+    
+    ```
+    Robot politebot = Robot("What a very nice robot.");
+    
+    Manager m;
+    m.schedule(politebot, 10_ms)
+    .init()
+    .start();
+    
+    std::cout << robot.current().name(); << std::endl;
+    m.emit(Event("intruder detected"));
+    std::cout << "Pardon me sir, I believe there is an INTRUDER";
+    std::cout << robot.current().name() << std::endl;
+    ```
+
+    File structure, starter code, and a unit_test file has been provided on Canvas. See the announcment for more details. 
 
 
 # License

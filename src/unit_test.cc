@@ -3,16 +3,16 @@
 #include <string>
 #include <chrono>
 #include "gtest/gtest.h"
-#include "stopwatch.h"
+#include "securitybot.h"
 
 namespace {
  
     using namespace elma;
-    using namespace stopwatch;
+    using namespace securitybot;
 
-    TEST(StopWatch,Construction) { 
-        StopWatch sw; 
-        ASSERT_EQ("off", sw.current().name());
+    TEST(SecurityBot,Construction) { 
+        SecurityBot sw; 
+        ASSERT_EQ("wander", sw.current().name());
     }
 
     // More tests go here. You should aim to test every
