@@ -56,12 +56,18 @@ void UserInterface::update() {
     }
 
     // OUTPUT
-    //Print the current state somehow???
-    //show_time(1,1,_stopwatch.value()); 
+    mvprintw(0,1," SSS  EEEE  CCCC  U  U  RRR   I  TTTTT  Y   Y  BBB    OOO   TTTTT");
+    mvprintw(1,1,"S     E     C     U  U  R  R  I    T     Y Y   B  B  O   O    T");
+    mvprintw(2,1," SS   EEEE  C     U  U  RRR   I    T      Y    BBB   O   O    T");
+    mvprintw(3,1,"   S  E     C     U  U  R  R  I    T      Y    B  B  O   O    T");
+    mvprintw(4,1,"SSS   EEEE  CCCC  UUUU  R  R  I    T      Y    BBB    OOO     T");
     std::string temporaryState = _securitybot.currentState();
-    // TODO: I need to clear the line before a new line is displayed
-    mvprintw(1,1,"%s", temporaryState.c_str());
-    mvprintw(3,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
+    move(6, 0); clrtoeol(); // clear line
+    mvprintw(6,1,"Current SecurityBot State:%s", temporaryState.c_str());
+    move(7, 0); clrtoeol(); // clear line
+    mvprintw(7,1,"Current SecurityBot Location:%d,%d", _securitybot.current_x(),_securitybot.current_y());
+    mvprintw(10,1,"Change State Manually:");
+    mvprintw(10,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
     // PRINT the lab list if needed
     // for ( int i=0; i<_stopwatch.laps().size(); i++ ) {
     //     mvprintw(5+i, 1, "Lap %d", _stopwatch.laps().size()-i);

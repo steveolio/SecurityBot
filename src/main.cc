@@ -16,7 +16,7 @@ int main() {
     UserInterface ui(securitybot);
 
     m.schedule(ui, 10_ms)
-     .schedule(securitybot, 10_ms)     
+     .schedule(securitybot, 1000_ms)     
      .init()
      .run();
 

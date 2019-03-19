@@ -10,9 +10,13 @@ using namespace securitybot;
 
 SecurityBot& WanderState:: securitybot() { return (SecurityBot&) state_machine(); }
 
+void WanderState::during(){
+    securitybot().wanderMove();
+}
+
 void WanderState::exit(const Event& e) {
     // NO ACTIONS CURRENTLY JUST STATES SO DON"T PERFORM ANY CALCULATIONS
-
+    //securitybot().wanderMove();
     // if ( e.name() == "start/stop" ) {
     //     // User started the stopwatch
     //     stopwatch().begin();

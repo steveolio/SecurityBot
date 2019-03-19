@@ -18,7 +18,7 @@ namespace securitybot {
         //! Build a new on state
         WanderState() : State("wander") {}
         void entry(const Event& e) {}
-        void during() {}
+        void during();
 
         //! Perform actions required when switching from off to on
         //! \param e The event that triggered the transition        

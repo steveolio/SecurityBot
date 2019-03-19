@@ -25,6 +25,16 @@ namespace securitybot {
         //! Return the current state of securitybot
         std::string currentState();
 
+        //! Move to a new location for the securitybot.
+        //! This function is used only when in the wander state
+        void wanderMove();
+
+        //! Return the current x location of securitybot
+        int current_x();
+
+        //! Return the current y location of securitybot
+        int current_y();
+
         /*
         //! Start the securitybot
         void begin();
@@ -55,6 +65,12 @@ namespace securitybot {
         RechargeState recharge;
 
         // Other private variables
+        int _current_x = 0;
+        int _current_y = 0;
+        int _x_lowerboundry = 0;
+        int _x_upperboundry = 10;
+        int _y_lowerboundry = 0;
+        int _y_upperboundry = 10;
         //bool _running;
         //high_resolution_clock::time_point _start_time;
         //high_resolution_clock::duration _elapsed;
