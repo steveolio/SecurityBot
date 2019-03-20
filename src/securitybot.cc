@@ -22,10 +22,6 @@ SecurityBot::SecurityBot() : StateMachine("securitybot") {
     add_transition("reset", evade, makenoise);                          // transfered to UI
     add_transition("reset", makenoise, wander);                         // transfered to UI
     add_transition("battery low", evade, findrecharge);                 // transfered to UI
-    //add_transition("start",wander,wander);
-
-    // Make sure we start in the right condition
-    //reset();
 }
 
 std::string SecurityBot::currentState(){
@@ -33,7 +29,7 @@ std::string SecurityBot::currentState(){
 }
 
 
-void SecurityBot::wanderMove(){
+void SecurityBot::wanderMoveFunction(){
     // The current position of the SecurityBot is found in these variables.
     // _current_x
     // _current_y
@@ -55,7 +51,31 @@ void SecurityBot::wanderMove(){
     }
     _current_x = temp_x;    // change the current x location
     _current_y = temp_y;    // change the current y location
+    
+    //Moving uses battery
+    if( _current_battery_percent > 0 ){
+        _current_battery_percent = _current_battery_percent - 0.1;
+    }
 
+}
+
+void SecurityBot::makeNoiseFunction(){
+    //Stuff about alarm
+}
+
+void SecurityBot::evadeMoveFunction(){
+    //Stuff about evade
+}
+void SecurityBot::findRechargeMoveFunction(){
+    //Stuff about finding the recharge station
+}
+
+void SecurityBot::rechargeFunction(){
+    //Stuff about evade
+}
+
+double SecurityBot::battery_status(){
+    return _current_battery_percent;
 }
 
 int SecurityBot::current_x(){

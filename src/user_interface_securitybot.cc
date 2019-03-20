@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <sstream>
 #include "securitybot.h"
 
 using namespace securitybot;
@@ -22,7 +23,19 @@ void UserInterface::printMap(int startline) {
                     tempstring = tempstring + "|";
                 } else {                                                                     //all other columns
                     if( j == _securitybot.current_x() && i == _securitybot.current_y() ){  
-                        tempstring = tempstring + "R";
+                        if (_securitybot.currentState() == "wander") {
+                            tempstring = tempstring + "W";
+                        } else if (_securitybot.currentState() == "make noise") {
+                            tempstring = tempstring + "A";
+                        } else if (_securitybot.currentState() == "evade") {
+                            tempstring = tempstring + "E";
+                        } else if (_securitybot.currentState() == "find recharge station") {
+                            tempstring = tempstring + "L";
+                        } else if (_securitybot.currentState() == "recharge") {
+                            tempstring = tempstring + "R";
+                        } else {
+                            tempstring = tempstring + "ERROR";
+                        }
                     } else {
                         tempstring = tempstring + " ";
                     }
@@ -32,7 +45,6 @@ void UserInterface::printMap(int startline) {
         move(j+startline, 0); clrtoeol(); // clear line of previous data
         mvprintw(j+startline,0,tempstring.c_str());
     }
-    
 }
 
 void UserInterface::update() {
@@ -75,40 +87,24 @@ void UserInterface::update() {
     mvprintw(2,1," SS   EEEE  C     U  U  RRR   I    T      Y    BBB   O   O    T");
     mvprintw(3,1,"   S  E     C     U  U  R  R  I    T      Y    B  B  O   O    T");
     mvprintw(4,1,"SSS   EEEE  CCCC  UUUU  R  R  I    T      Y    BBB    OOO     T");
-    // Leave next line blank
+
     move(6, 0); clrtoeol(); // clear line of previous data
     mvprintw(6,1,"Current SecurityBot State:%s", _securitybot.currentState().c_str());
     move(7, 0); clrtoeol(); // clear line of previous data
-    mvprintw(7,1,"Current SecurityBot Location:%d,%d", _securitybot.current_x(),_securitybot.current_y());
-    mvprintw(10,1,"Change State Manually:");
-    mvprintw(10,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
-    // PRINT the boundry and show wher the robot is
+    std::string tempbatterystatus = std::to_string(_securitybot.battery_status()).substr(0,5);
+    //tempbatterystatus.substr(0,4);
+    //mvprintw(7,1,"Current SecurityBot Battery %:%s", std::to_string(_securitybot.battery_status()).c_str() );
+    mvprintw(7,1,"Current SecurityBot Battery %:%s", tempbatterystatus.c_str() );
+    move(8, 0); clrtoeol(); // clear line of previous data
+    mvprintw(8,1,"Current SecurityBot Location:%d,%d", _securitybot.current_x(),_securitybot.current_y());
+
+    mvprintw(10,1,"Trigger Events Manually: Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
     
-    int startline = 12;
+    mvprintw(12,1,"SecurityBot States Key: W:Wander, A:Alarm, E=Evade, L:Low Battery, R:Recharging");
+    // PRINT the boundry and show where the robot is
+    int startline = 14;
     printMap(startline);
-    // std::string tempstring = "";
-    // for (int j = _securitybot.x_lowerboundry()-1; j <= _securitybot.x_upperboundry()+1; j++){ //row
-    //     tempstring = "";
-    //     for (int i = _securitybot.y_lowerboundry()-1; i <= _securitybot.y_upperboundry()+1; i++){ //column
-    //         if(j == _securitybot.x_lowerboundry()-1 || j == _securitybot.x_upperboundry()+1){ //if first or last row
-    //             tempstring = tempstring + "=";
-    //         } else {                                                                          //all other rows
-    //             if(i == _securitybot.y_lowerboundry()-1 || i == _securitybot.y_upperboundry()+1){ //if first or last column
-    //                 tempstring = tempstring + "|";
-    //             } else {                                                                     //all other columns
-    //                 if( j == _securitybot.current_x() && i == _securitybot.current_y() ){  
-    //                     tempstring = tempstring + "R";
-    //                 } else {
-    //                     tempstring = tempstring + " ";
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     move(j+offset, 0); clrtoeol(); // clear line of previous data
-    //     mvprintw(j+offset,0,tempstring.c_str());
-    // }
     
     // NOTE: Sleep the ui to give processing time back to the OS.
     usleep(9999);
-
 }

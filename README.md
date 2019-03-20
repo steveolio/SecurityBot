@@ -8,13 +8,20 @@ This list of milestones in the project:
 - [x] Get the robot finate state machine running in order to pass the grading file (due: March 17th---completed: March 17th)
 - [x] Update the README.md file to include installation instructions (due: March 17th---completed: March 17th)
 - [x] Add a coordinate system to the robot structure  (due: March 20th---completed: March 18th)
-    - [ ] Add coordinates for recharge stations (due: March 19th---completed: ??? )
-    - [ ] Add moveEvade and moveFindRecharge (due: March 19th---completed: ??? )
 - [x] Research what visualization tools exist for c++ (due: March 17th---completed: March 15th) 
 - [x] Impliment UI tool into the program (due: March 20th---completed: March 17th)
-- [ ] Impliment visualization of coordinate system into the program (due: March 20th---completed: ??? )
-- [ ] Add simulations of the battery state and intruder state (due: March 22nd---completed: ??? )
-- [ ] Complete API documentation (due: March 22nd---completed: ??? )
+- [x] Impliment visualization of coordinate system into the program (due: March 20th---completed: March 19th )
+- [x] Add API documentation (due: March 20nd---completed: March 19th )
+- [x] Add simulations of the battery state (due: March 22nd---completed: March 19th )
+
+- [ ] Update unit tests for all methods (due: March 19th---completed: ??? )
+- [ ] Add coordinates for recharge station (due: March 19th---completed: ??? )
+- [ ] Add details to evadeMoveFunction (due: March 19th---completed: ??? )
+- [ ] Add details to findRechargeMoveFunction (due: March 19th---completed: ??? )
+- [ ] Add details to makeNoiseFunction (due: March 19th---completed: ??? )
+- [ ] Add details to rechargeFunction (due: March 19th---completed: ??? )
+- [ ] Add simulations of the intruder state (due: March 22nd---completed: ??? )
+- [ ] Finalize API documentation (due: March 22nd---completed: ??? )
 - [ ] Create a docs page in GitHub (due: March 22nd---completed: ??? )
 - [ ] Submit the final version to GitHub (due: March 22nd---completed: ??? )
 
@@ -68,26 +75,7 @@ It is not recommended to install Elma without using Docker.  If you desire to do
 
 # Detailed System Description
 SecurityBot is a statemachine that models the following diagram:
-
-    <img src="images/robot.png" width="620"></image>
-
-    Please define this code as a class called `Robot` in `homework/robot.h` (optionally `robot.cc` if you want). You will need to inherit a State and StateMachine classes. Your new State class used to hold robot states is should only internally be `Robot`, so it does not matter what it is named. Initialization of a `Robot` should initialize all of the states and transitions. You should be able to initialize your robot via the following:
-    
-    ```
-    Robot politebot = Robot("What a very nice robot.");
-    
-    Manager m;
-    m.schedule(politebot, 10_ms)
-    .init()
-    .start();
-    
-    std::cout << robot.current().name(); << std::endl;
-    m.emit(Event("intruder detected"));
-    std::cout << "Pardon me sir, I believe there is an INTRUDER";
-    std::cout << robot.current().name() << std::endl;
-    ```
-
-    File structure, starter code, and a unit_test file has been provided on Canvas. See the announcment for more details. 
+<img src="./images/system.png" width="620">
 
 
 # License

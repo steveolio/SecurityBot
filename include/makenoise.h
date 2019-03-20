@@ -11,19 +11,17 @@ namespace securitybot {
     class SecurityBot;  // Declare containing class so it can be refered to here
                         // before it is defined in securitybot.h 
 
-    //! The wander state of the securitybot
+    //! The Sound the alarm state of the securitybot
     class MakeNoiseState : public State {        
 
         public:
-        //! Build a new on state
+        //! Build a new MakeNoiseState state
         MakeNoiseState() : State("make noise") {}
         void entry(const Event& e) {}
-        void during() {}
-
-        //! Perform actions required when switching from off to on
-        //! \param e The event that triggered the transition        
-        void exit(const Event&);
-  
+        //! Perform actions required when in the make noise state 
+        void during();        
+        void exit(const Event&) {}
+        //! \return A reference to the containing finite state machine object
         SecurityBot& securitybot();    
 
     };

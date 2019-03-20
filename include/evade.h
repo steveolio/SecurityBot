@@ -11,19 +11,17 @@ namespace securitybot {
     class SecurityBot;  // Declare containing class so it can be refered to here
                         // before it is defined in securitybot.h 
 
-    //! The wander state of the securitybot
+    //! The Evade an intruder state of the securitybot
     class EvadeState : public State {        
 
         public:
-        //! Build a new on state
+        //! Build a new EvadeState state
         EvadeState() : State("evade") {}
         void entry(const Event& e) {}
-        void during() {}
-
-        //! Perform actions required when switching from off to on
-        //! \param e The event that triggered the transition        
-        void exit(const Event&);
-  
+        //! Perform actions required when in the evade station state 
+        void during();  
+        void exit(const Event&) {}
+        //! \return A reference to the containing finite state machine object
         SecurityBot& securitybot();    
 
     };

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>My Elma Project: Main Page</title>
+<title>SecurityBot: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,10 +21,12 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td style="padding-left: 0.5em;">
-   <div id="projectname">My Elma Project
+   <div id="projectname">SecurityBot
+   &#160;<span id="projectnumber">0.1</span>
    </div>
-   <div id="projectbrief">An event loop manager for embedded systems</div>
+   <div id="projectbrief">A robot finite state machine built from the elma libraries.</div>
   </td>
  </tr>
  </tbody>
@@ -75,39 +77,79 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">My Elma Project Documentation</div>  </div>
+<div class="title">SecurityBot Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="http://klavinslab.org/elma">Elma</a> is an event loop manager designed to teach embedded and reactive systems programming. This repository contains an example Elma project, showing how to use many Elma features, as well as illustrating how to arrange the files and directories in an Elma project.</p>
-<p>The source code for this project is available <a href="https://github.com/klavinslab/elma_project">on github</a>.</p>
-<h2>Installation </h2>
-<pre class="fragment">git clone https://github.com/klavinslab/elma_project.git
-cd elma_project
-docker run -v $PWD:/source -it klavins/elma:latest bash
-make
-make docs
-</pre><h2>Execution </h2>
-<p>To run the stopwatch, type </p><pre class="fragment">bin/stopwatch
-</pre><p>The stopwatch is controlled via the keyboard, via these keys:</p><ul>
-<li><b>s</b>: Start or stop</li>
-<li><b>l</b>: Lap</li>
-<li><b>r</b>: Reset</li>
-<li><b>q</b>: Quit</li>
+<div class="textblock"><p>A robot finite state machine built from the elma libraries found <a href="https://github.com/klavinslab/elma">here</a>. The goal of the project is to create a simulation of the robot in a 2D environment and to output a visualization of the robot's state over time.</p>
+<h1>Project Plan </h1>
+<p>This list of milestones in the project:</p><ul>
+<li>[x] Get the robot finate state machine running in order to pass the grading file (due: March 17th&mdash;completed: March 17th)</li>
+<li>[x] Update the <a class="el" href="README_8md_source.html">README.md</a> file to include installation instructions (due: March 17th&mdash;completed: March 17th)</li>
+<li>[x] Add a coordinate system to the robot structure (due: March 20th&mdash;completed: March 18th)</li>
+<li>[x] Research what visualization tools exist for c++ (due: March 17th&mdash;completed: March 15th)</li>
+<li>[x] Impliment UI tool into the program (due: March 20th&mdash;completed: March 17th)</li>
+<li>[x] Impliment visualization of coordinate system into the program (due: March 20th&mdash;completed: March 19th )</li>
+<li>[x] Add API documentation (due: March 20nd&mdash;completed: March 19th )</li>
+<li>[x] Add simulations of the battery state (due: March 22nd&mdash;completed: March 19th )</li>
+<li>[ ] Update unit tests for all methods (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add coordinates for recharge station (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add details to evadeMoveFunction (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add details to findRechargeMoveFunction (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add details to makeNoiseFunction (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add details to rechargeFunction (due: March 19th&mdash;completed: ??? )</li>
+<li>[ ] Add simulations of the intruder state (due: March 22nd&mdash;completed: ??? )</li>
+<li>[ ] Finalize API documentation (due: March 22nd&mdash;completed: ??? )</li>
+<li>[ ] Create a docs page in GitHub (due: March 22nd&mdash;completed: ??? )</li>
+<li>[ ] Submit the final version to GitHub (due: March 22nd&mdash;completed: ??? )</li>
 </ul>
-<h2>Testing </h2>
-<p>To run tests, do ```bash bin/test ```</p>
-<h2>Architecture </h2>
-<p>Describe how your project was designed, what choices you made, how things are organized, etc.</p>
-<h2>Results </h2>
-<p>Describe the results of testing and running your code. Include visuals when possible.</p>
-<h2>Acknowledgements </h2>
-<p>Mention anyone who helped you and how.</p>
-<h2>References </h2>
-<p>List all libraries, articles, stack overflow answers, etc. that you used to get your code working. </p>
+<h1>Installation</h1>
+<p>In order to build and run the SecurityBot program you will need the following:</p>
+<h2>I) An installation of <a href="https://git-scm.com/">Git</a></h2>
+<p>(Which you probably already have if you are reading this.) </p><h3>Mac</h3>
+<ol type="1">
+<li>Install the Xcode Command Line Tools. <h3>Windows</h3>
+</li>
+</ol>
+<ol type="1">
+<li>Go to <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></li>
+</ol>
+<h2>II) An installation of <a href="https://www.docker.com/">Docker</a></h2>
+<h3>Mac</h3>
+<ol type="1">
+<li>Go to <a href="https://www.docker.com/">https://www.docker.com/</a></li>
+<li>Download <code>Docker.dmg</code> and double click on it. Once the Docker icon shows up in your status bar, you can open a terminal and start using docker. <h3>Windows 10 Professional or Enterprise</h3>
+</li>
+</ol>
+<ol type="1">
+<li>Go to <a href="https://www.docker.com/">https://www.docker.com/</a></li>
+<li>Download and run installer <h3>Windows 10 Home and possibly Windows 8</h3>
+</li>
+</ol>
+<ol type="1">
+<li>Go to <a href="https://docs.docker.com/toolbox/toolbox_install_windows/">https://docs.docker.com/toolbox/toolbox_install_windows/</a></li>
+<li>Download and run installer</li>
+<li>Run Docker Quickstart</li>
+</ol>
+<h2>III) An integrated development environment "IDE": I've used <a href="https://code.visualstudio.com/">Visual Studio Code</a></h2>
+<ol type="1">
+<li>Go to <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></li>
+<li>Download and run installer</li>
+</ol>
+<h2>IV) A copy of the SecurityBot software</h2>
+<p>Use git to clone SecurityBot into a local folder. Open "git bash" program in the folder you wish to download the software and run the following command: ```bash git clone <a href="https://github.com/klavins/ECEP520.git">https://github.com/klavins/ECEP520.git</a> ``` </p><h2>V) A C++ Build Environment From Dockerhub</h2>
+<p>Next you will need a C++ build environment in order to compile the newly downloaded software. I recommend a build environment that has all the necessary elma libraries already built into it. This environment, called a Docker container, has all the necessary OS setup and libraries for the SecurityBot program to compile correctly. The Docker container I recommend is called "elma". In order to use this container you need to open a shell terminal, navigate to the directory in which you downloaded the SecurityBot source code, and type the following: ```bash docker run -v $PWD:/source -it klavins/elma:latest bash ``` Note: $PWD may not work on all Windows OS so replace with full path for example: ```bash docker run -v /c/workingDIRECTORY/SecurityBot:/source -it klavins/elma:latest bash ```</p>
+<h1>Manual Installation</h1>
+<p>It is not recommended to install Elma without using Docker. If you desire to do so anyway, you can view instructions <a href="https://github.com/klavinslab/elma/blob/master/README.md#manual-installation">here</a></p>
+<h1>Detailed System Description</h1>
+<p>SecurityBot is a statemachine that models the following diagram: </p><div class="image">
+<img src="./images/system.png"  width="620"/>
+</div>
+<h1>License</h1>
+<p>This software is open source and uses the MIT license. Details can be found <a href="https://github.com/steveolio/SecurityBot/blob/master/LICENSE">here</a>. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 14 2019 18:49:22 for My Elma Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2019 05:57:02 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

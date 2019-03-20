@@ -15,7 +15,7 @@ namespace securitybot {
     using namespace std::chrono;
     using namespace elma;    
 
-    //! A stop watch class, that inherits from StateMachine
+    //! A SecurityBot class, that inherits from StateMachine
     class SecurityBot : public StateMachine {
 
         public:
@@ -27,7 +27,26 @@ namespace securitybot {
 
         //! Move to a new location for the securitybot.
         //! This function is used only when in the wander state
-        void wanderMove();
+        void wanderMoveFunction();
+
+        //! Sound the alarm and monitor for proximity of intruder.
+        //! This function is used only when in the makenoise state
+        void makeNoiseFunction();
+
+        //! Move away from the intruder.
+        //! This function is used only when in the evade state
+        void evadeMoveFunction();
+
+        //! Find the recharge station when the battery is low.
+        //! This function is used only when in the findrecharge state
+        void findRechargeMoveFunction();
+
+        //! Recharge the battery at the station.
+        //! This function is used only when in the recharge state
+        void rechargeFunction();
+
+        //! Return the current battery percentage of securitybot 0% - 100%
+        double battery_status();
 
         //! Return the current x location of securitybot
         int current_x();
@@ -63,6 +82,7 @@ namespace securitybot {
         int _x_upperboundry = 10; // Rows
         int _y_lowerboundry = 0;
         int _y_upperboundry = 100; // columns
+        double _current_battery_percent = 100;
     };
 
 }
