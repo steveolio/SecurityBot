@@ -66,30 +66,15 @@ int SecurityBot::current_y(){
     return _current_y;
 }
 
-/* I don't need any functions right now
-
-high_resolution_clock::duration StopWatch::value() {
-    if ( current().name() == "on" ) {
-        return high_resolution_clock::now() - _start_time + _elapsed;
-    } else {
-        return _elapsed;
-    }
+int SecurityBot::x_lowerboundry(){
+    return _x_lowerboundry;
 }
-
-void StopWatch::begin() {
-    _start_time = high_resolution_clock::now();
+int SecurityBot::x_upperboundry(){
+    return _x_upperboundry;
 }
-
-void StopWatch::reset() {
-    _elapsed = high_resolution_clock::duration::zero();
-    _laps.clear();
+int SecurityBot::y_lowerboundry(){
+    return _y_lowerboundry;
 }
-
-void StopWatch::stop() {
-    _elapsed += high_resolution_clock::now() - _start_time;
+int SecurityBot::y_upperboundry(){
+    return _y_upperboundry;
 }
-
-void StopWatch::lap() {
-    _laps.insert(_laps.begin(), value());
-}
-*/

@@ -35,47 +35,34 @@ namespace securitybot {
         //! Return the current y location of securitybot
         int current_y();
 
-        /*
-        //! Start the securitybot
-        void begin();
+        //! Return the lower boundry of x in the map for securitybot
+        int x_lowerboundry();
 
-        //! Reset the securitybot
-        void reset();
+        //! Return the upper boundry of x in the map for securitybot
+        int x_upperboundry();
 
-        //! Stop the securitybot
-        void stop();
+        //! Return the lower boundry of y in the map for securitybot
+        int y_lowerboundry();
 
-        //! Add a lap time to the list of lap times.
-        void lap();
-        */
-
-        //! Get the time stored by the stopwatch
-        //high_resolution_clock::duration value();
-
-        //! Get a list of lap times
-        //const vector<high_resolution_clock::duration>& laps() { return _laps; }
+        //! Return the upper boundry of y in the map for securitybot
+        int y_upperboundry();
 
         private:
 
-        // When overriding the StateMachine class, put state declarations here.
+        // Override the StateMachine declarations
         WanderState wander;
         MakeNoiseState makenoise;
         EvadeState evade;
         FindRechargeState findrecharge;
         RechargeState recharge;
 
-        // Other private variables
+        // System private variables
         int _current_x = 0;
         int _current_y = 0;
         int _x_lowerboundry = 0;
-        int _x_upperboundry = 10;
+        int _x_upperboundry = 10; // Rows
         int _y_lowerboundry = 0;
-        int _y_upperboundry = 10;
-        //bool _running;
-        //high_resolution_clock::time_point _start_time;
-        //high_resolution_clock::duration _elapsed;
-        //vector<high_resolution_clock::duration> _laps;
-
+        int _y_upperboundry = 100; // columns
     };
 
 }

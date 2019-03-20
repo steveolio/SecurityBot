@@ -26,9 +26,8 @@ namespace securitybot {
         void init() {}
         void start() {}
 
-        // TODO: Create new functions for what I need....
-        //! Display the time at the given x,y position on the screen
-        //void show_time(int x, int y, high_resolution_clock::duration d);
+        //! Display the robot at the given x,y position on the screen
+        void printMap(int startline);
 
         //! Update the user interface by (a) reading keyboard input and (b) writing to the screen
         void update();

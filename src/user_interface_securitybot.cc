@@ -10,16 +10,30 @@ UserInterface::UserInterface(SecurityBot& sw) : Process("user input"), _security
     curs_set(0); // Do not show the cursor
 };
 
-// void UserInterface::show_time(int x, int y, high_resolution_clock::duration d) {
-
-//     // Print the time at the desired position.
-//     // mvprintw just calls sprintf
-//     mvprintw(x,y,"%d:%02d:%02d", 
-//         std::chrono::duration_cast<std::chrono::minutes>(d).count(),
-//         std::chrono::duration_cast<std::chrono::seconds>(d).count()%60,
-//         (std::chrono::duration_cast<std::chrono::milliseconds>(d).count()%1000)/10
-//     );
-// }
+void UserInterface::printMap(int startline) {
+    std::string tempstring = "";
+    for (int j = _securitybot.x_lowerboundry()-1; j <= _securitybot.x_upperboundry()+1; j++){ //row
+        tempstring = "";
+        for (int i = _securitybot.y_lowerboundry()-1; i <= _securitybot.y_upperboundry()+1; i++){ //column
+            if(j == _securitybot.x_lowerboundry()-1 || j == _securitybot.x_upperboundry()+1){ //if first or last row
+                tempstring = tempstring + "=";
+            } else {                                                                          //all other rows
+                if(i == _securitybot.y_lowerboundry()-1 || i == _securitybot.y_upperboundry()+1){ //if first or last column
+                    tempstring = tempstring + "|";
+                } else {                                                                     //all other columns
+                    if( j == _securitybot.current_x() && i == _securitybot.current_y() ){  
+                        tempstring = tempstring + "R";
+                    } else {
+                        tempstring = tempstring + " ";
+                    }
+                }
+            }
+        }
+        move(j+startline, 0); clrtoeol(); // clear line of previous data
+        mvprintw(j+startline,0,tempstring.c_str());
+    }
+    
+}
 
 void UserInterface::update() {
 
@@ -61,24 +75,40 @@ void UserInterface::update() {
     mvprintw(2,1," SS   EEEE  C     U  U  RRR   I    T      Y    BBB   O   O    T");
     mvprintw(3,1,"   S  E     C     U  U  R  R  I    T      Y    B  B  O   O    T");
     mvprintw(4,1,"SSS   EEEE  CCCC  UUUU  R  R  I    T      Y    BBB    OOO     T");
-    std::string temporaryState = _securitybot.currentState();
-    move(6, 0); clrtoeol(); // clear line
-    mvprintw(6,1,"Current SecurityBot State:%s", temporaryState.c_str());
-    move(7, 0); clrtoeol(); // clear line
+    // Leave next line blank
+    move(6, 0); clrtoeol(); // clear line of previous data
+    mvprintw(6,1,"Current SecurityBot State:%s", _securitybot.currentState().c_str());
+    move(7, 0); clrtoeol(); // clear line of previous data
     mvprintw(7,1,"Current SecurityBot Location:%d,%d", _securitybot.current_x(),_securitybot.current_y());
     mvprintw(10,1,"Change State Manually:");
     mvprintw(10,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
-    // PRINT the lab list if needed
-    // for ( int i=0; i<_stopwatch.laps().size(); i++ ) {
-    //     mvprintw(5+i, 1, "Lap %d", _stopwatch.laps().size()-i);
-    //     show_time(5+i, 10, _stopwatch.laps()[i]);
+    // PRINT the boundry and show wher the robot is
+    
+    int startline = 12;
+    printMap(startline);
+    // std::string tempstring = "";
+    // for (int j = _securitybot.x_lowerboundry()-1; j <= _securitybot.x_upperboundry()+1; j++){ //row
+    //     tempstring = "";
+    //     for (int i = _securitybot.y_lowerboundry()-1; i <= _securitybot.y_upperboundry()+1; i++){ //column
+    //         if(j == _securitybot.x_lowerboundry()-1 || j == _securitybot.x_upperboundry()+1){ //if first or last row
+    //             tempstring = tempstring + "=";
+    //         } else {                                                                          //all other rows
+    //             if(i == _securitybot.y_lowerboundry()-1 || i == _securitybot.y_upperboundry()+1){ //if first or last column
+    //                 tempstring = tempstring + "|";
+    //             } else {                                                                     //all other columns
+    //                 if( j == _securitybot.current_x() && i == _securitybot.current_y() ){  
+    //                     tempstring = tempstring + "R";
+    //                 } else {
+    //                     tempstring = tempstring + " ";
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     move(j+offset, 0); clrtoeol(); // clear line of previous data
+    //     mvprintw(j+offset,0,tempstring.c_str());
     // }
-
-    // NOTE: Since the stopwatch is running every 10 ms, we should sleep
-    //       the ui to give processing time back to the OS. It is debatable
-    //       whether this is the right place to put this. It could also become
-    //       an Elma feature, or it could go in the StopWatch class, etc.
-    //       The number 9999 should also be a parameter and not a constant.
+    
+    // NOTE: Sleep the ui to give processing time back to the OS.
     usleep(9999);
 
 }
