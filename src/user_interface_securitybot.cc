@@ -37,7 +37,11 @@ void UserInterface::printMap(int startline) {
                             tempstring = tempstring + "ERROR";
                         }
                     } else {
-                        tempstring = tempstring + " ";
+                        if( j == _securitybot.x_rechargestation() && i == _securitybot.y_rechargestation()){
+                            tempstring = tempstring + "C";
+                        } else{
+                            tempstring = tempstring + " ";
+                        }
                     }
                 }
             }
@@ -89,20 +93,21 @@ void UserInterface::update() {
     mvprintw(4,1,"SSS   EEEE  CCCC  UUUU  R  R  I    T      Y    BBB    OOO     T");
 
     move(6, 0); clrtoeol(); // clear line of previous data
-    mvprintw(6,1,"Current SecurityBot State:%s", _securitybot.currentState().c_str());
+    mvprintw(6,1,"Current SecurityBot State: %s", _securitybot.currentState().c_str());
     move(7, 0); clrtoeol(); // clear line of previous data
-    std::string tempbatterystatus = std::to_string(_securitybot.battery_status()).substr(0,5);
+    std::string tempbatterystatus = std::to_string(_securitybot.batteryStatus()).substr(0,5);
     //tempbatterystatus.substr(0,4);
-    //mvprintw(7,1,"Current SecurityBot Battery %:%s", std::to_string(_securitybot.battery_status()).c_str() );
-    mvprintw(7,1,"Current SecurityBot Battery %:%s", tempbatterystatus.c_str() );
+    //mvprintw(7,1,"Current SecurityBot Battery %:%s", std::to_string(_securitybot.batteryStatus()).c_str() );
+    mvprintw(7,1,"Current SecurityBot Battery Percentage: %s", tempbatterystatus.c_str() );
     move(8, 0); clrtoeol(); // clear line of previous data
-    mvprintw(8,1,"Current SecurityBot Location:%d,%d", _securitybot.current_x(),_securitybot.current_y());
+    mvprintw(8,1,"Current SecurityBot Location: %d,%d", _securitybot.current_x(),_securitybot.current_y());
 
-    mvprintw(10,1,"Trigger Events Manually: Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
+    mvprintw(10,1,"Trigger Events Manually by typing the following commands:");
+    mvprintw(11,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
     
-    mvprintw(12,1,"SecurityBot States Key: W:Wander, A:Alarm, E=Evade, L:Low Battery, R:Recharging");
+    mvprintw(13,1,"SecurityBot States Icon Key: W=Wander, A=Alarm, E=Evade, L=Low Battery, R=Recharging");
     // PRINT the boundry and show where the robot is
-    int startline = 14;
+    int startline = 15; //REMEMBER WHEN SETTING THIS THAT THE printmap WILL DRAW THE BORDER AT -1 THIS NUMBER 
     printMap(startline);
     
     // NOTE: Sleep the ui to give processing time back to the OS.

@@ -46,7 +46,10 @@ namespace securitybot {
         void rechargeFunction();
 
         //! Return the current battery percentage of securitybot 0% - 100%
-        double battery_status();
+        double batteryStatus();
+        
+        //! Consume battery energy based on the state.
+        void consumeBattery();
 
         //! Return the current x location of securitybot
         int current_x();
@@ -66,6 +69,12 @@ namespace securitybot {
         //! Return the upper boundry of y in the map for securitybot
         int y_upperboundry();
 
+        //! Return the x location of the recharge station in the map for securitybot
+        int x_rechargestation();
+
+        //! Return the y location of the recharge station in the map for securitybot
+        int y_rechargestation();
+
         private:
 
         // Override the StateMachine declarations
@@ -82,7 +91,9 @@ namespace securitybot {
         int _x_upperboundry = 10; // Rows
         int _y_lowerboundry = 0;
         int _y_upperboundry = 100; // columns
-        double _current_battery_percent = 100;
+        double _current_battery_percent = 22;
+        int _x_rechargestation = (_x_upperboundry - _x_lowerboundry)/2;
+        int _y_rechargestation = _y_upperboundry;
     };
 
 }

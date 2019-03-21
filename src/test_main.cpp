@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "gtest/gtest.h"
+#include "securitybot.h"
 
 GTEST_API_ int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);

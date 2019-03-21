@@ -22,12 +22,12 @@ SecurityBot::SecurityBot() : StateMachine("securitybot") {
     add_transition("reset", evade, makenoise);                          // transfered to UI
     add_transition("reset", makenoise, wander);                         // transfered to UI
     add_transition("battery low", evade, findrecharge);                 // transfered to UI
+    add_transition("battery low", makenoise, findrecharge);             // transfered to UI
 }
 
 std::string SecurityBot::currentState(){
     return current().name();
 }
-
 
 void SecurityBot::wanderMoveFunction(){
     // The current position of the SecurityBot is found in these variables.
@@ -53,9 +53,7 @@ void SecurityBot::wanderMoveFunction(){
     _current_y = temp_y;    // change the current y location
     
     //Moving uses battery
-    if( _current_battery_percent > 0 ){
-        _current_battery_percent = _current_battery_percent - 0.1;
-    }
+    consumeBattery();
 
 }
 
@@ -66,16 +64,74 @@ void SecurityBot::makeNoiseFunction(){
 void SecurityBot::evadeMoveFunction(){
     //Stuff about evade
 }
+
 void SecurityBot::findRechargeMoveFunction(){
-    //Stuff about finding the recharge station
+    // The current position of the SecurityBot is found in these variables.
+    // _current_x
+    // _current_y
+    
+    int x_offset, y_offset, temp_x, temp_y;   // initialize new variables
+
+    if(_current_x > _x_rechargestation){
+        x_offset = -1;
+    } else if (_current_x < _x_rechargestation) {
+        x_offset = 1;
+    } else {
+        x_offset = 0;
+    }
+
+    if(_current_y > _y_rechargestation){
+        y_offset = -1;
+    } else if (_current_y < _y_rechargestation) {
+        y_offset = 1;
+    }  else {
+        y_offset = 0;
+    }
+
+    if(x_offset == 0 && y_offset == 0){
+        emit(Event("found recharge station"));
+    } else {
+        temp_x = _current_x + x_offset;
+        temp_y = _current_y + y_offset;
+
+        //Check outer boundries
+        if( (temp_x < _x_lowerboundry) || (temp_x > _x_upperboundry) ){
+            temp_x = _current_x;
+        }
+        if( (temp_y < _y_lowerboundry) || (temp_y > _y_upperboundry) ){
+            temp_y = _current_y;
+        }
+        _current_x = temp_x;    // change the current x location
+        _current_y = temp_y;    // change the current y location
+        
+        //Moving uses battery
+        consumeBattery();
+    }
 }
 
 void SecurityBot::rechargeFunction(){
-    //Stuff about evade
+    if(_current_battery_percent<100){
+        _current_battery_percent = _current_battery_percent + 1;
+    } else {
+        emit(Event("battery full"));
+    }
 }
 
-double SecurityBot::battery_status(){
+double SecurityBot::batteryStatus(){
     return _current_battery_percent;
+}
+
+void SecurityBot::consumeBattery(){
+    if( _current_battery_percent > 20 ){
+        if( current().name() == "wander" || current().name() == "evade" || current().name() == "find recharge station"){
+            _current_battery_percent = _current_battery_percent - 0.1;
+        } else if (current().name() == "make noise") {
+            _current_battery_percent = _current_battery_percent - 0.05;
+        }
+    } else {
+        emit(Event("battery low"));
+        _current_battery_percent = _current_battery_percent - 0.1;
+    }
 }
 
 int SecurityBot::current_x(){
@@ -97,4 +153,10 @@ int SecurityBot::y_lowerboundry(){
 }
 int SecurityBot::y_upperboundry(){
     return _y_upperboundry;
+}
+int SecurityBot::x_rechargestation(){
+    return _x_rechargestation;
+}
+int SecurityBot::y_rechargestation(){
+    return _y_rechargestation;
 }
