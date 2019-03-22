@@ -4,7 +4,7 @@
 
 using namespace securitybot;
 
-UserInterface::UserInterface(SecurityBot& sw) : Process("user input"), _securitybot(sw) {
+UserInterface::UserInterface(SecurityBot& sw, Intruder& in) : Process("user input"), _securitybot(sw), _intruder(in) {
     initscr();   // Start ncurses
     timeout(1);  // Timeout for waiting for user input
     noecho();    // Do not echo user input to the screen
@@ -39,6 +39,8 @@ void UserInterface::printMap(int startline) {
                     } else {
                         if( j == _securitybot.x_rechargestation() && i == _securitybot.y_rechargestation()){
                             tempstring = tempstring + "C";
+                        } else if (j == _intruder.current_intruder_x() && i == _intruder.current_intruder_y()){
+                            tempstring = tempstring + "I";
                         } else{
                             tempstring = tempstring + " ";
                         }

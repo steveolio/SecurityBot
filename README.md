@@ -17,8 +17,8 @@ This list of milestones in the project:
 - [x] Add coordinates for recharge station (due: March 19th---completed: March 20th )
 - [x] Add details to findRechargeMoveFunction (due: March 19th---completed: March 20th )
 - [x] Add details to rechargeFunction (due: March 19th---completed: March 20th )
+- [x] Add simulations of the intruder state (due: March 22nd---completed: March 21st )
 
-- [ ] Add simulations of the intruder state (due: March 22nd---completed: ??? )
 - [ ] Add details to makeNoiseFunction (due: March 19th---completed: ??? )
 - [ ] Add details to evadeMoveFunction (due: March 19th---completed: ??? )
 - [ ] Finalize API documentation (due: March 22nd---completed: ??? )

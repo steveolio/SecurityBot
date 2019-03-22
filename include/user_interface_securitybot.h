@@ -7,6 +7,7 @@
 #include <ncurses.h>
 
 #include "securitybot.h"
+#include "intruder.h"
 
 namespace securitybot {
 
@@ -21,7 +22,7 @@ namespace securitybot {
 
         //! Create a new securitybot user interface using curses
         //! \param sw A reference to a SecurityBot object
-        UserInterface(SecurityBot& sw);
+        UserInterface(SecurityBot& sw, Intruder& in);
 
         void init() {}
         void start() {}
@@ -35,6 +36,8 @@ namespace securitybot {
 
         private:
         SecurityBot& _securitybot;
+        Intruder& _intruder;
+
 
     };
 
