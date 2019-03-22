@@ -87,6 +87,14 @@ void UserInterface::update() {
             break;
     }
 
+    // //check proximity to intruder
+    // if ( _intruder.distance_to_intruder_x()  < 5 && _intruder.distance_to_intruder_y() < 5 ){
+    //     emit(Event("proximity warning"));
+    // } else if ( _intruder.distance_to_intruder_x()  < 15 && _intruder.distance_to_intruder_y() < 15 ){
+    //     emit(Event("intruder detected"));
+    // }
+
+
     // OUTPUT
     mvprintw(0,1," SSS  EEEE  CCCC  U  U  RRR   I  TTTTT  Y   Y  BBB    OOO   TTTTT");
     mvprintw(1,1,"S     E     C     U  U  R  R  I    T     Y Y   B  B  O   O    T");
@@ -98,20 +106,20 @@ void UserInterface::update() {
     mvprintw(6,1,"Current SecurityBot State: %s", _securitybot.currentState().c_str());
     move(7, 0); clrtoeol(); // clear line of previous data
     std::string tempbatterystatus = std::to_string(_securitybot.batteryStatus()).substr(0,5);
-    //tempbatterystatus.substr(0,4);
-    //mvprintw(7,1,"Current SecurityBot Battery %:%s", std::to_string(_securitybot.batteryStatus()).c_str() );
     mvprintw(7,1,"Current SecurityBot Battery Percentage: %s", tempbatterystatus.c_str() );
     move(8, 0); clrtoeol(); // clear line of previous data
     mvprintw(8,1,"Current SecurityBot Location: %d,%d", _securitybot.current_x(),_securitybot.current_y());
+    move(9, 0); clrtoeol(); // clear line of previous data
+    mvprintw(9,1,"Current Intruder Location: %d,%d", _intruder.current_intruder_x(),_intruder.current_intruder_y());
 
-    mvprintw(10,1,"Trigger Events Manually by typing the following commands:");
-    mvprintw(11,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
+    mvprintw(11,1,"Trigger Events Manually by typing the following commands:");
+    mvprintw(12,1,"Intruder Detected(i), Proximity Warning(p), Reset(r), Battery Low(e), Found Recharge Station(s), Battery Full(f), Quit(q)");
     
-    mvprintw(13,1,"SecurityBot States Icon Key: W=Wander, A=Alarm, E=Evade, L=Low Battery, R=Recharging");
+    mvprintw(14,1,"SecurityBot States Icon Key: W=Wander, A=Alarm, E=Evade, L=Low Battery, R=Recharging");
     // PRINT the boundry and show where the robot is
-    int startline = 15; //REMEMBER WHEN SETTING THIS THAT THE printmap WILL DRAW THE BORDER AT -1 THIS NUMBER 
+    int startline = 16; //REMEMBER WHEN SETTING THIS THAT THE printmap WILL DRAW THE BORDER AT -1 THIS NUMBER 
     printMap(startline);
     
     // NOTE: Sleep the ui to give processing time back to the OS.
-    usleep(9999);
+    usleep(500);
 }

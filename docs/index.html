@@ -81,7 +81,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>A robot finite state machine built from the elma libraries found <a href="https://github.com/klavinslab/elma">here</a>. The goal of the project is to create a simulation of the robot in a 2D environment and to output a visualization of the robot's state over time.</p>
-<h1>Project Plan </h1>
+<h1>Source Code Wiki</h1>
+<p><a href="https://steveolio.github.io/SecurityBot/">https://steveolio.github.io/SecurityBot/</a></p>
+<h1>Project Plan</h1>
 <p>This list of milestones in the project:</p><ul>
 <li>[x] Get the robot finate state machine running in order to pass the grading file (due: March 17th&mdash;completed: March 17th)</li>
 <li>[x] Update the <a class="el" href="README_8md_source.html">README.md</a> file to include installation instructions (due: March 17th&mdash;completed: March 17th)</li>
@@ -91,15 +93,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>[x] Impliment visualization of coordinate system into the program (due: March 20th&mdash;completed: March 19th )</li>
 <li>[x] Add API documentation (due: March 20nd&mdash;completed: March 19th )</li>
 <li>[x] Add simulations of the battery state (due: March 22nd&mdash;completed: March 19th )</li>
-<li>[ ] Update unit tests for all methods (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add coordinates for recharge station (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add details to evadeMoveFunction (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add details to findRechargeMoveFunction (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add details to makeNoiseFunction (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add details to rechargeFunction (due: March 19th&mdash;completed: ??? )</li>
-<li>[ ] Add simulations of the intruder state (due: March 22nd&mdash;completed: ??? )</li>
+<li>[x] Update unit tests for all methods (due: March 19th&mdash;completed: March 20th )</li>
+<li>[x] Add coordinates for recharge station (due: March 19th&mdash;completed: March 20th )</li>
+<li>[x] Add details to findRechargeMoveFunction (due: March 19th&mdash;completed: March 20th )</li>
+<li>[x] Add details to rechargeFunction (due: March 19th&mdash;completed: March 20th )</li>
+<li>[x] Add simulations of the intruder state (due: March 22nd&mdash;completed: March 21st )</li>
+<li>[X] Add details to makeNoiseFunction (due: March 19th&mdash;completed: March 21st )</li>
+<li>[X] Add details to evadeMoveFunction (due: March 19th&mdash;completed: March 21st )</li>
 <li>[ ] Finalize API documentation (due: March 22nd&mdash;completed: ??? )</li>
-<li>[ ] Create a docs page in GitHub (due: March 22nd&mdash;completed: ??? )</li>
+<li>[x] Create a docs page in GitHub (due: March 22nd&mdash;completed: March 19th )</li>
 <li>[ ] Submit the final version to GitHub (due: March 22nd&mdash;completed: ??? )</li>
 </ul>
 <h1>Installation</h1>
@@ -140,6 +142,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Next you will need a C++ build environment in order to compile the newly downloaded software. I recommend a build environment that has all the necessary elma libraries already built into it. This environment, called a Docker container, has all the necessary OS setup and libraries for the SecurityBot program to compile correctly. The Docker container I recommend is called "elma". In order to use this container you need to open a shell terminal, navigate to the directory in which you downloaded the SecurityBot source code, and type the following: ```bash docker run -v $PWD:/source -it klavins/elma:latest bash ``` Note: $PWD may not work on all Windows OS so replace with full path for example: ```bash docker run -v /c/workingDIRECTORY/SecurityBot:/source -it klavins/elma:latest bash ```</p>
 <h1>Manual Installation</h1>
 <p>It is not recommended to install Elma without using Docker. If you desire to do so anyway, you can view instructions <a href="https://github.com/klavinslab/elma/blob/master/README.md#manual-installation">here</a></p>
+<h1>How to Run</h1>
+<p>Once the source code has been downloaded:</p><ol type="1">
+<li>Open a shell terminal</li>
+<li>Navigate to the source directory</li>
+<li>Start the docker image: ```bash PS C:&gt; docker run -v /c/path/securitybot:/source -it klavins/elma:latest bash ```</li>
+<li>Run Make</li>
+<li>Run the test software or the SecurityBot simulation: ```bash ./bin/test or ./bin/securitybot ```</li>
+<li>View user interface for keyboard commands, and enjoy!</li>
+</ol>
 <h1>Detailed System Description</h1>
 <p>SecurityBot is a statemachine that models the following diagram: </p><div class="image">
 <img src="./images/system.png"  width="620"/>
@@ -149,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2019 05:57:02 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2019 05:34:32 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

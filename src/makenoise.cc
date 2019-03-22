@@ -1,7 +1,6 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
-
 #include "securitybot.h"
 
 using namespace std::chrono;

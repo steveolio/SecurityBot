@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['printmap',['printMap',['../classsecuritybot_1_1UserInterface.html#af635abd3b7e19afd36a2d1dd5576aecd',1,'securitybot::UserInterface']]]
+  ['makenoisefunction',['makeNoiseFunction',['../classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb',1,'securitybot::SecurityBot']]],
+  ['makenoisestate',['MakeNoiseState',['../classsecuritybot_1_1MakeNoiseState.html#a676100af52796be79161d37cf21b5e38',1,'securitybot::MakeNoiseState']]],
+  ['makenoisestate',['MakeNoiseState',['../classsecuritybot_1_1MakeNoiseState.html',1,'securitybot']]]
 ];

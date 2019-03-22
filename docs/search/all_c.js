@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['y_5flowerboundry',['y_lowerboundry',['../classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306',1,'securitybot::SecurityBot']]],
-  ['y_5fupperboundry',['y_upperboundry',['../classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724',1,'securitybot::SecurityBot']]]
+  ['x_5flowerboundry',['x_lowerboundry',['../classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75',1,'securitybot::SecurityBot']]],
+  ['x_5frechargestation',['x_rechargestation',['../classsecuritybot_1_1SecurityBot.html#aaea709b770927ebac0067af330687486',1,'securitybot::SecurityBot']]],
+  ['x_5fupperboundry',['x_upperboundry',['../classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96',1,'securitybot::SecurityBot']]]
 ];

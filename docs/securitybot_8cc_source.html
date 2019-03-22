@@ -100,7 +100,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceelma.html">elma</a>;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesecuritybot.html">securitybot</a>;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a3cf89ec81256b64685b0e5c06e6f2cb8">   12</a></span>&#160;SecurityBot::SecurityBot() : StateMachine(<span class="stringliteral">&quot;securitybot&quot;</span>) {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a3cf89ec81256b64685b0e5c06e6f2cb8">   12</a></span>&#160;SecurityBot::SecurityBot() : StateMachine(<span class="stringliteral">&quot;securitybot&quot;</span>){</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Define state machine initial states and transitions here</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    set_initial(wander);</div>
@@ -113,102 +113,250 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    add_transition(<span class="stringliteral">&quot;reset&quot;</span>, evade, makenoise);                          <span class="comment">// transfered to UI</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    add_transition(<span class="stringliteral">&quot;reset&quot;</span>, makenoise, wander);                         <span class="comment">// transfered to UI</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    add_transition(<span class="stringliteral">&quot;battery low&quot;</span>, evade, findrecharge);                 <span class="comment">// transfered to UI</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">   27</a></span>&#160;std::string <a class="code" href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">SecurityBot::currentState</a>(){</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">return</span> current().name();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    add_transition(<span class="stringliteral">&quot;battery low&quot;</span>, makenoise, findrecharge);             <span class="comment">// transfered to UI</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">   28</a></span>&#160;std::string <a class="code" href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">SecurityBot::currentState</a>(){</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> current().name();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aa916d53e7f033adf8b7a8a15d3275ea9">   32</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aa916d53e7f033adf8b7a8a15d3275ea9">SecurityBot::wanderMoveFunction</a>(){</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// The current position of the SecurityBot is found in these variables.</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// _current_x</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// _current_y</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">int</span> x_offset, y_offset, temp_x, temp_y;   <span class="comment">// initialize new variables</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    srand (time(NULL)); <span class="comment">// initialize random seed</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    x_offset = rand() %3+1; <span class="comment">// generate secret number between 1 and 3</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    x_offset = x_offset -2; <span class="comment">// change number to be between -1 and 1</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    y_offset = rand() %3+1; <span class="comment">// generate secret number between 1 and 3</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    y_offset = y_offset -2; <span class="comment">// change number to be between -1 and 1</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    temp_x = _current_x + x_offset;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    temp_y = _current_y + y_offset;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">//Check outer boundries</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span>( (temp_x &lt; _x_lowerboundry) || (temp_x &gt; _x_upperboundry) ){</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        temp_x = _current_x;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span>( (temp_y &lt; _y_lowerboundry) || (temp_y &gt; _y_upperboundry) ){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        temp_y = _current_y;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    _current_x = temp_x;    <span class="comment">// change the current x location</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    _current_y = temp_y;    <span class="comment">// change the current y location</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//Moving uses battery</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span>( _current_battery_percent &gt; 0 ){</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        _current_battery_percent = _current_battery_percent - 0.1;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">SecurityBot::makeNoiseFunction</a>(){</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">//Stuff about alarm</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">   66</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">SecurityBot::evadeMoveFunction</a>(){</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">//Stuff about evade</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">   69</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">SecurityBot::findRechargeMoveFunction</a>(){</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">//Stuff about finding the recharge station</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> x_offset, y_offset, temp_x, temp_y, intruderx, intrudery;   <span class="comment">// initialize new variables</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    srand (time(NULL)); <span class="comment">// initialize random seed</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Get the current position of the intruder</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        intruderx = channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).latest();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        intrudery = channel(<span class="stringliteral">&quot;Intruder_Y&quot;</span>).latest();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//check proximity to intruder</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> ( abs(intruderx - _current_x) &lt; 10 &amp;&amp; abs(intrudery - _current_y) &lt; 10 ){</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        emit(Event(<span class="stringliteral">&quot;intruder detected&quot;</span>));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        x_offset = rand() %3+1; <span class="comment">// generate secret number between 1 and 3</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        x_offset = x_offset -2; <span class="comment">// change number to be between -1 and 1</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        y_offset = rand() %3+1; <span class="comment">// generate secret number between 1 and 3</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        y_offset = y_offset -2; <span class="comment">// change number to be between -1 and 1</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        temp_x = _current_x + x_offset;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        temp_y = _current_y + y_offset;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment">//Check outer boundries</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">if</span>( (temp_x &lt; _x_lowerboundry) || (temp_x &gt; _x_upperboundry) ){</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            temp_x = _current_x;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">if</span>( (temp_y &lt; _y_lowerboundry) || (temp_y &gt; _y_upperboundry) ){</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            temp_y = _current_y;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        _current_x = temp_x;    <span class="comment">// change the current x location</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        _current_y = temp_y;    <span class="comment">// change the current y location</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">//Moving uses battery</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">consumeBattery</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">SecurityBot::rechargeFunction</a>(){</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">//Stuff about evade</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a2a78a73dc5a34636f7aef1f80e73d062">   77</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a2a78a73dc5a34636f7aef1f80e73d062">SecurityBot::battery_status</a>(){</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> _current_battery_percent;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">   81</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">SecurityBot::current_x</a>(){</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> _current_x;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">   85</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">SecurityBot::current_y</a>(){</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> _current_y;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">   73</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">SecurityBot::makeNoiseFunction</a>(){</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">int</span> intruderx, intrudery;   <span class="comment">// initialize new variables</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Get the current position of the intruder</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        intruderx = channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).latest();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        intrudery = channel(<span class="stringliteral">&quot;Intruder_Y&quot;</span>).latest();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//check proximity to intruder</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> ( abs(intruderx - _current_x) &lt; 5 &amp;&amp; abs(intrudery - _current_y) &lt; 5 ){</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        emit(Event(<span class="stringliteral">&quot;proximity warning&quot;</span>));</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">   89</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">SecurityBot::x_lowerboundry</a>(){</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> _x_lowerboundry;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">   92</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">SecurityBot::x_upperboundry</a>(){</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> _x_upperboundry;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">   95</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">SecurityBot::y_lowerboundry</a>(){</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> _y_lowerboundry;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">   98</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">SecurityBot::y_upperboundry</a>(){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">return</span> _y_upperboundry;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aa0e066a96f9c2f9c131de21c211e0cdf"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">securitybot::SecurityBot::rechargeFunction</a></div><div class="ttdeci">void rechargeFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00073">securitybot.cc:73</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a10ab8379787bcbb4573fe404b4ccaf19"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">securitybot::SecurityBot::currentState</a></div><div class="ttdeci">std::string currentState()</div><div class="ttdoc">Return the current state of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00027">securitybot.cc:27</a></div></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">consumeBattery</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">   92</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">SecurityBot::evadeMoveFunction</a>(){</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> intruderx;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> intrudery;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// Get the current position of the intruder</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        intruderx = channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).latest();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> ( channel(<span class="stringliteral">&quot;Intruder_X&quot;</span>).nonempty() ) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        intrudery = channel(<span class="stringliteral">&quot;Intruder_Y&quot;</span>).latest();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">int</span> x_offset, y_offset, temp_x, temp_y;   <span class="comment">// initialize new variables</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span>( (_current_x - intruderx) &gt; 0){</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        x_offset = 1;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( (_current_x - intruderx) &lt; 0){</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        x_offset = -1;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    } </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span>( (_current_y - intrudery) &gt; 0){</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        y_offset = 1;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ( (_current_y - intrudery) &lt; 0){</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        y_offset = -1;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="comment">// If the intruder is on the robot</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">if</span>( (_current_y - intrudery) == 0 &amp;&amp; (_current_x - intruderx) == 0 ){</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">if</span>( _current_x == _x_upperboundry){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            x_offset = -2;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">if</span>( _current_x == _x_lowerboundry){</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            x_offset = +2;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">if</span>( _current_y == _y_upperboundry){</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            y_offset = -2;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">if</span>( _current_y == _y_lowerboundry){</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            y_offset = +2;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    temp_x = _current_x + x_offset;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    temp_y = _current_y + y_offset;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="comment">//Check outer boundries</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span>( (temp_x &lt; _x_lowerboundry) || (temp_x &gt; _x_upperboundry) ){</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        temp_x = _current_x;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">if</span>( (temp_y &lt; _y_lowerboundry) || (temp_y &gt; _y_upperboundry) ){</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        temp_y = _current_y;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    _current_x = temp_x;    <span class="comment">// change the current x location</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    _current_y = temp_y;    <span class="comment">// change the current y location</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <a class="code" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">consumeBattery</a>();</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">  151</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">SecurityBot::findRechargeMoveFunction</a>(){</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">// The current position of the SecurityBot is found in these variables.</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="comment">// _current_x</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="comment">// _current_y</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">int</span> x_offset, y_offset, temp_x, temp_y;   <span class="comment">// initialize new variables</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordflow">if</span>(_current_x &gt; _x_rechargestation){</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        x_offset = -1;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_current_x &lt; _x_rechargestation) {</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        x_offset = 1;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        x_offset = 0;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <span class="keywordflow">if</span>(_current_y &gt; _y_rechargestation){</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        y_offset = -1;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_current_y &lt; _y_rechargestation) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        y_offset = 1;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }  <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        y_offset = 0;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    }</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">if</span>(x_offset == 0 &amp;&amp; y_offset == 0){</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        emit(Event(<span class="stringliteral">&quot;found recharge station&quot;</span>));</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        temp_x = _current_x + x_offset;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        temp_y = _current_y + y_offset;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="comment">//Check outer boundries</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">if</span>( (temp_x &lt; _x_lowerboundry) || (temp_x &gt; _x_upperboundry) ){</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            temp_x = _current_x;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">if</span>( (temp_y &lt; _y_lowerboundry) || (temp_y &gt; _y_upperboundry) ){</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;            temp_y = _current_y;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        _current_x = temp_x;    <span class="comment">// change the current x location</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        _current_y = temp_y;    <span class="comment">// change the current y location</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="comment">//Moving uses battery</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <a class="code" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">consumeBattery</a>();</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">  195</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">SecurityBot::rechargeFunction</a>(){</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span>(_current_battery_percent&lt;100){</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        _current_battery_percent = _current_battery_percent + 1;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        emit(Event(<span class="stringliteral">&quot;battery full&quot;</span>));</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;}</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a6168db6eac7f461d800c94e43ebba4d3">  203</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a6168db6eac7f461d800c94e43ebba4d3">SecurityBot::batteryStatus</a>(){</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">return</span> _current_battery_percent;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">  207</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">SecurityBot::consumeBattery</a>(){</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">if</span>( _current_battery_percent &gt; 20 ){</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keywordflow">if</span>( current().name() == <span class="stringliteral">&quot;wander&quot;</span> || current().name() == <span class="stringliteral">&quot;evade&quot;</span> || current().name() == <span class="stringliteral">&quot;find recharge station&quot;</span>){</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            _current_battery_percent = _current_battery_percent - 0.1;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (current().name() == <span class="stringliteral">&quot;make noise&quot;</span>) {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            _current_battery_percent = _current_battery_percent - 0.05;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        emit(Event(<span class="stringliteral">&quot;battery low&quot;</span>));</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        _current_battery_percent = _current_battery_percent - 0.1;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
+<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">  220</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">SecurityBot::current_x</a>(){</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">return</span> _current_x;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">  224</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">SecurityBot::current_y</a>(){</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">return</span> _current_y;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">  228</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">SecurityBot::x_lowerboundry</a>(){</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">return</span> _x_lowerboundry;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
+<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">  231</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">SecurityBot::x_upperboundry</a>(){</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> _x_upperboundry;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">  234</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">SecurityBot::y_lowerboundry</a>(){</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">return</span> _y_lowerboundry;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">  237</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">SecurityBot::y_upperboundry</a>(){</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keywordflow">return</span> _y_upperboundry;</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#aaea709b770927ebac0067af330687486">  240</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#aaea709b770927ebac0067af330687486">SecurityBot::x_rechargestation</a>(){</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordflow">return</span> _x_rechargestation;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1SecurityBot.html#ac279afdf2e77a62f9f15b62d797c44ac">  243</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="classsecuritybot_1_1SecurityBot.html#ac279afdf2e77a62f9f15b62d797c44ac">SecurityBot::y_rechargestation</a>(){</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">return</span> _y_rechargestation;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aa0e066a96f9c2f9c131de21c211e0cdf"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aa0e066a96f9c2f9c131de21c211e0cdf">securitybot::SecurityBot::rechargeFunction</a></div><div class="ttdeci">void rechargeFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00195">securitybot.cc:195</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a10ab8379787bcbb4573fe404b4ccaf19"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a10ab8379787bcbb4573fe404b4ccaf19">securitybot::SecurityBot::currentState</a></div><div class="ttdeci">std::string currentState()</div><div class="ttdoc">Return the current state of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00028">securitybot.cc:28</a></div></div>
 <div class="ttc" id="namespacesecuritybot_html"><div class="ttname"><a href="namespacesecuritybot.html">securitybot</a></div><div class="ttdef"><b>Definition:</b> <a href="evade_8h_source.html#l00006">evade.h:6</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aafa5c9b365605576e436fba337c6169d"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">securitybot::SecurityBot::findRechargeMoveFunction</a></div><div class="ttdeci">void findRechargeMoveFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00069">securitybot.cc:69</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aae344016fc4e6076995e0e9ab526f8cb"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">securitybot::SecurityBot::makeNoiseFunction</a></div><div class="ttdeci">void makeNoiseFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00062">securitybot.cc:62</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_ab560da46ae698988e162c5cb6d7efa75"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">securitybot::SecurityBot::x_lowerboundry</a></div><div class="ttdeci">int x_lowerboundry()</div><div class="ttdoc">Return the lower boundry of x in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00089">securitybot.cc:89</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a2696a2db88f8f1b49be4a82a1363a306"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">securitybot::SecurityBot::y_lowerboundry</a></div><div class="ttdeci">int y_lowerboundry()</div><div class="ttdoc">Return the lower boundry of y in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00095">securitybot.cc:95</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a3a6a9654ac7e1ef8ec5d3271bd7f12e5"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">securitybot::SecurityBot::current_x</a></div><div class="ttdeci">int current_x()</div><div class="ttdoc">Return the current x location of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00081">securitybot.cc:81</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aa578a53294a6d34bbad372bd9f9c6a12"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">securitybot::SecurityBot::current_y</a></div><div class="ttdeci">int current_y()</div><div class="ttdoc">Return the current y location of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00085">securitybot.cc:85</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aafa5c9b365605576e436fba337c6169d"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aafa5c9b365605576e436fba337c6169d">securitybot::SecurityBot::findRechargeMoveFunction</a></div><div class="ttdeci">void findRechargeMoveFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00151">securitybot.cc:151</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aaea709b770927ebac0067af330687486"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aaea709b770927ebac0067af330687486">securitybot::SecurityBot::x_rechargestation</a></div><div class="ttdeci">int x_rechargestation()</div><div class="ttdoc">Return the x location of the recharge station in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00240">securitybot.cc:240</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aae344016fc4e6076995e0e9ab526f8cb"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aae344016fc4e6076995e0e9ab526f8cb">securitybot::SecurityBot::makeNoiseFunction</a></div><div class="ttdeci">void makeNoiseFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00073">securitybot.cc:73</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_ab560da46ae698988e162c5cb6d7efa75"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#ab560da46ae698988e162c5cb6d7efa75">securitybot::SecurityBot::x_lowerboundry</a></div><div class="ttdeci">int x_lowerboundry()</div><div class="ttdoc">Return the lower boundry of x in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00228">securitybot.cc:228</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a2696a2db88f8f1b49be4a82a1363a306"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a2696a2db88f8f1b49be4a82a1363a306">securitybot::SecurityBot::y_lowerboundry</a></div><div class="ttdeci">int y_lowerboundry()</div><div class="ttdoc">Return the lower boundry of y in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00234">securitybot.cc:234</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a3a6a9654ac7e1ef8ec5d3271bd7f12e5"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a3a6a9654ac7e1ef8ec5d3271bd7f12e5">securitybot::SecurityBot::current_x</a></div><div class="ttdeci">int current_x()</div><div class="ttdoc">Return the current x location of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00220">securitybot.cc:220</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a6168db6eac7f461d800c94e43ebba4d3"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a6168db6eac7f461d800c94e43ebba4d3">securitybot::SecurityBot::batteryStatus</a></div><div class="ttdeci">double batteryStatus()</div><div class="ttdoc">Return the current battery percentage of securitybot 0% - 100%. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00203">securitybot.cc:203</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aa578a53294a6d34bbad372bd9f9c6a12"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aa578a53294a6d34bbad372bd9f9c6a12">securitybot::SecurityBot::current_y</a></div><div class="ttdeci">int current_y()</div><div class="ttdoc">Return the current y location of securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00224">securitybot.cc:224</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a4a6fd5855eb9ebf68e2e844b508281c7"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a4a6fd5855eb9ebf68e2e844b508281c7">securitybot::SecurityBot::consumeBattery</a></div><div class="ttdeci">void consumeBattery()</div><div class="ttdoc">Consume battery energy based on the state. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00207">securitybot.cc:207</a></div></div>
 <div class="ttc" id="classsecuritybot_1_1SecurityBot_html_aa916d53e7f033adf8b7a8a15d3275ea9"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#aa916d53e7f033adf8b7a8a15d3275ea9">securitybot::SecurityBot::wanderMoveFunction</a></div><div class="ttdeci">void wanderMoveFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00032">securitybot.cc:32</a></div></div>
 <div class="ttc" id="namespacestd_1_1chrono_html"><div class="ttname"><a href="namespacestd_1_1chrono.html">chrono</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a01c63427a39a3a645be8084f0ab73f96"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">securitybot::SecurityBot::x_upperboundry</a></div><div class="ttdeci">int x_upperboundry()</div><div class="ttdoc">Return the upper boundry of x in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00092">securitybot.cc:92</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a2a78a73dc5a34636f7aef1f80e73d062"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a2a78a73dc5a34636f7aef1f80e73d062">securitybot::SecurityBot::battery_status</a></div><div class="ttdeci">double battery_status()</div><div class="ttdoc">Return the current battery percentage of securitybot 0% - 100%. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00077">securitybot.cc:77</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_ac279afdf2e77a62f9f15b62d797c44ac"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#ac279afdf2e77a62f9f15b62d797c44ac">securitybot::SecurityBot::y_rechargestation</a></div><div class="ttdeci">int y_rechargestation()</div><div class="ttdoc">Return the y location of the recharge station in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00243">securitybot.cc:243</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_a01c63427a39a3a645be8084f0ab73f96"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#a01c63427a39a3a645be8084f0ab73f96">securitybot::SecurityBot::x_upperboundry</a></div><div class="ttdeci">int x_upperboundry()</div><div class="ttdoc">Return the upper boundry of x in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00231">securitybot.cc:231</a></div></div>
 <div class="ttc" id="namespaceelma_html"><div class="ttname"><a href="namespaceelma.html">elma</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_abf6fe3de26fef4b8f1a45327fa14f79d"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">securitybot::SecurityBot::evadeMoveFunction</a></div><div class="ttdeci">void evadeMoveFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00066">securitybot.cc:66</a></div></div>
-<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_ad4488aa833b711adf690c2ab2ee4c724"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">securitybot::SecurityBot::y_upperboundry</a></div><div class="ttdeci">int y_upperboundry()</div><div class="ttdoc">Return the upper boundry of y in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00098">securitybot.cc:98</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_abf6fe3de26fef4b8f1a45327fa14f79d"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#abf6fe3de26fef4b8f1a45327fa14f79d">securitybot::SecurityBot::evadeMoveFunction</a></div><div class="ttdeci">void evadeMoveFunction()</div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00092">securitybot.cc:92</a></div></div>
+<div class="ttc" id="classsecuritybot_1_1SecurityBot_html_ad4488aa833b711adf690c2ab2ee4c724"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html#ad4488aa833b711adf690c2ab2ee4c724">securitybot::SecurityBot::y_upperboundry</a></div><div class="ttdeci">int y_upperboundry()</div><div class="ttdoc">Return the upper boundry of y in the map for securitybot. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8cc_source.html#l00237">securitybot.cc:237</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2019 05:57:02 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2019 05:34:30 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

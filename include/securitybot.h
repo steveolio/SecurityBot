@@ -90,7 +90,7 @@ namespace securitybot {
         int _x_lowerboundry = 0;
         int _x_upperboundry = 10; // Rows
         int _y_lowerboundry = 0;
-        int _y_upperboundry = 50; // columns
+        int _y_upperboundry = 30; // columns
         double _current_battery_percent = 100;
         int _x_rechargestation = (_x_upperboundry - _x_lowerboundry)/2;
         int _y_rechargestation = _y_upperboundry;

@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classsecuritybot_1_1SecurityBot.html" title="A SecurityBot class, that inherits from StateMachine. " alt="" coords="164,5,339,32"/>
+<area shape="rect" id="node2" href="$classsecuritybot_1_1Intruder.html" title="An Intruder for the SecurityBot object. " alt="" coords="143,5,294,32"/>
+<area shape="rect" id="node3" href="$classsecuritybot_1_1UserInterface.html" title="A user interface for the a SecurityBot object. " alt="" coords="125,56,312,83"/>
 </map>

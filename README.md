@@ -1,9 +1,10 @@
-SecurityBot
-===
+# SecurityBot
 A robot finite state machine built from the elma libraries found [here](https://github.com/klavinslab/elma).  The goal of the project is to create a simulation of the robot in a 2D environment and to output a visualization of the robot's state over time.
 
-Project Plan
-===
+# Source Code Wiki
+https://steveolio.github.io/SecurityBot/
+
+# Project Plan
 This list of milestones in the project:
 - [x] Get the robot finate state machine running in order to pass the grading file (due: March 17th---completed: March 17th)
 - [x] Update the README.md file to include installation instructions (due: March 17th---completed: March 17th)
@@ -18,13 +19,16 @@ This list of milestones in the project:
 - [x] Add details to findRechargeMoveFunction (due: March 19th---completed: March 20th )
 - [x] Add details to rechargeFunction (due: March 19th---completed: March 20th )
 - [x] Add simulations of the intruder state (due: March 22nd---completed: March 21st )
-
-- [ ] Add details to makeNoiseFunction (due: March 19th---completed: ??? )
-- [ ] Add details to evadeMoveFunction (due: March 19th---completed: ??? )
-- [ ] Finalize API documentation (due: March 22nd---completed: ??? )
+- [X] Add details to makeNoiseFunction (due: March 19th---completed: March 21st )
+- [X] Add details to evadeMoveFunction (due: March 19th---completed: March 21st )
+- [x] Finalize API documentation (due: March 22nd---completed: March 21st )
 - [x] Create a docs page in GitHub (due: March 22nd---completed: March 19th )
-- [ ] Submit the final version to GitHub (due: March 22nd---completed: ??? )
-
+- [x] Submit the final version to GitHub (due: March 22nd---completed: March 21st )
+### Future Project Update Suggestions (community contributions welcome!)
+- [ ] Create an alarm state when in low battery
+- [ ] Manually control the Intruder
+- [ ] Add objects to the environment
+- [ ] Change movement of the SecurityBot to be more "roomba" like
 
 # Installation
 In order to build and run the SecurityBot program you will need the following:
@@ -72,11 +76,26 @@ docker run -v /c/workingDIRECTORY/SecurityBot:/source -it klavins/elma:latest ba
 # Manual Installation
 It is not recommended to install Elma without using Docker.  If you desire to do so anyway, you can view instructions [here](https://github.com/klavinslab/elma/blob/master/README.md#manual-installation)
 
+# How to Run
+Once the source code has been downloaded:
+1. Open a shell terminal
+2. Navigate to the source directory
+3. Start the docker image: 
+```bash
+PS C:\path\securitybot> docker run -v /c/path/securitybot:/source -it klavins/elma:latest bash
+```
+4. Run Make
+5. Run the test software or the SecurityBot simulation:
+```bash
+./bin/test
+    or 
+./bin/securitybot
+```
+6. View user interface for keyboard commands, and enjoy!
 
 # Detailed System Description
 SecurityBot is a statemachine that models the following diagram:
 <img src="./images/system.png" width="620">
-
 
 # License
 This software is open source and uses the MIT license. Details can be found [here](https://github.com/steveolio/SecurityBot/blob/master/LICENSE).

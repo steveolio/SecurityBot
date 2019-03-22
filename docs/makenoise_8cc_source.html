@@ -92,18 +92,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;securitybot.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd_1_1chrono.html">std::chrono</a>;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceelma.html">elma</a>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesecuritybot.html">securitybot</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1MakeNoiseState.html#ae70da95712e72a413517e369c8f50111">   11</a></span>&#160;<a class="code" href="classsecuritybot_1_1SecurityBot.html">SecurityBot</a>&amp; MakeNoiseState:: securitybot() { <span class="keywordflow">return</span> (<a class="code" href="classsecuritybot_1_1SecurityBot.html">SecurityBot</a>&amp;) state_machine(); }</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1MakeNoiseState.html#a8de0ff9e90d1f4a79eca2887e2e07489">   13</a></span>&#160;<span class="keywordtype">void</span> MakeNoiseState::during(){</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="namespacesecuritybot.html">securitybot</a>().makeNoiseFunction();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;securitybot.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd_1_1chrono.html">std::chrono</a>;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespaceelma.html">elma</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacesecuritybot.html">securitybot</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1MakeNoiseState.html#ae70da95712e72a413517e369c8f50111">   10</a></span>&#160;<a class="code" href="classsecuritybot_1_1SecurityBot.html">SecurityBot</a>&amp; MakeNoiseState:: securitybot() { <span class="keywordflow">return</span> (<a class="code" href="classsecuritybot_1_1SecurityBot.html">SecurityBot</a>&amp;) state_machine(); }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classsecuritybot_1_1MakeNoiseState.html#a8de0ff9e90d1f4a79eca2887e2e07489">   12</a></span>&#160;<span class="keywordtype">void</span> MakeNoiseState::during(){</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="namespacesecuritybot.html">securitybot</a>().makeNoiseFunction();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
 <div class="ttc" id="namespacesecuritybot_html"><div class="ttname"><a href="namespacesecuritybot.html">securitybot</a></div><div class="ttdef"><b>Definition:</b> <a href="evade_8h_source.html#l00006">evade.h:6</a></div></div>
 <div class="ttc" id="namespacestd_1_1chrono_html"><div class="ttname"><a href="namespacestd_1_1chrono.html">chrono</a></div></div>
 <div class="ttc" id="classsecuritybot_1_1SecurityBot_html"><div class="ttname"><a href="classsecuritybot_1_1SecurityBot.html">securitybot::SecurityBot</a></div><div class="ttdoc">A SecurityBot class, that inherits from StateMachine. </div><div class="ttdef"><b>Definition:</b> <a href="securitybot_8h_source.html#l00019">securitybot.h:19</a></div></div>
@@ -111,7 +110,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2019 05:57:02 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 22 2019 05:34:30 for SecurityBot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

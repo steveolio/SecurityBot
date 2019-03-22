@@ -32,6 +32,12 @@ namespace securitybot {
         //! Return the current y location of securitybot
         int current_intruder_y();
 
+        //! Return the absolute distance between SecurityBot and Intruder x
+        int distance_to_intruder_x();
+
+        //! Return the absolute distance between SecurityBot and Intruder y
+        int distance_to_intruder_y();
+
         //! Update the position of the Intruder and move around the room
         void update();
 
@@ -39,7 +45,7 @@ namespace securitybot {
 
         private:
         SecurityBot& _securitybot;
-        
+
         int _current_intruder_x = 0;
         int _current_intruder_y = 0;
     };

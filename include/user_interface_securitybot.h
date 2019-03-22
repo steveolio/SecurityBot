@@ -22,6 +22,7 @@ namespace securitybot {
 
         //! Create a new securitybot user interface using curses
         //! \param sw A reference to a SecurityBot object
+        //! \param in A reference to the Intruder object
         UserInterface(SecurityBot& sw, Intruder& in);
 
         void init() {}

@@ -9,7 +9,7 @@ using namespace std::chrono;
 using namespace elma;
 using namespace securitybot;
 
-SecurityBot::SecurityBot() : StateMachine("securitybot") {
+SecurityBot::SecurityBot() : StateMachine("securitybot"){
 
     // Define state machine initial states and transitions here
     set_initial(wander);
@@ -33,13 +33,105 @@ void SecurityBot::wanderMoveFunction(){
     // The current position of the SecurityBot is found in these variables.
     // _current_x
     // _current_y
-    
-    int x_offset, y_offset, temp_x, temp_y;   // initialize new variables
+    int x_offset, y_offset, temp_x, temp_y, intruderx, intrudery;   // initialize new variables
     srand (time(NULL)); // initialize random seed
-    x_offset = rand() %3+1; // generate secret number between 1 and 3
-    x_offset = x_offset -2; // change number to be between -1 and 1
-    y_offset = rand() %3+1; // generate secret number between 1 and 3
-    y_offset = y_offset -2; // change number to be between -1 and 1
+
+    // Get the current position of the intruder
+    if ( channel("Intruder_X").nonempty() ) {
+        intruderx = channel("Intruder_X").latest();
+    }
+    if ( channel("Intruder_X").nonempty() ) {
+        intrudery = channel("Intruder_Y").latest();
+    }
+    
+    //check proximity to intruder
+    if ( abs(intruderx - _current_x) < 10 && abs(intrudery - _current_y) < 10 ){
+        emit(Event("intruder detected"));
+    } else {
+        x_offset = rand() %3+1; // generate secret number between 1 and 3
+        x_offset = x_offset -2; // change number to be between -1 and 1
+        y_offset = rand() %3+1; // generate secret number between 1 and 3
+        y_offset = y_offset -2; // change number to be between -1 and 1
+        temp_x = _current_x + x_offset;
+        temp_y = _current_y + y_offset;
+        //Check outer boundries
+        if( (temp_x < _x_lowerboundry) || (temp_x > _x_upperboundry) ){
+            temp_x = _current_x;
+        }
+        if( (temp_y < _y_lowerboundry) || (temp_y > _y_upperboundry) ){
+            temp_y = _current_y;
+        }
+        _current_x = temp_x;    // change the current x location
+        _current_y = temp_y;    // change the current y location
+
+        //Moving uses battery
+        consumeBattery();
+    }
+
+}
+
+void SecurityBot::makeNoiseFunction(){
+    int intruderx, intrudery;   // initialize new variables
+
+    // Get the current position of the intruder
+    if ( channel("Intruder_X").nonempty() ) {
+        intruderx = channel("Intruder_X").latest();
+    }
+    if ( channel("Intruder_X").nonempty() ) {
+        intrudery = channel("Intruder_Y").latest();
+    }
+
+    //check proximity to intruder
+    if ( abs(intruderx - _current_x) < 5 && abs(intrudery - _current_y) < 5 ){
+        emit(Event("proximity warning"));
+    }
+
+    consumeBattery();
+}
+
+void SecurityBot::evadeMoveFunction(){
+    int intruderx;
+    int intrudery;
+
+    // Get the current position of the intruder
+    if ( channel("Intruder_X").nonempty() ) {
+        intruderx = channel("Intruder_X").latest();
+    }
+    if ( channel("Intruder_X").nonempty() ) {
+        intrudery = channel("Intruder_Y").latest();
+    }
+
+    int x_offset, y_offset, temp_x, temp_y;   // initialize new variables
+
+    if( (_current_x - intruderx) > 0){
+        x_offset = 1;
+    } else if ( (_current_x - intruderx) < 0){
+        x_offset = -1;
+    } 
+
+    if( (_current_y - intrudery) > 0){
+        y_offset = 1;
+    } else if ( (_current_y - intrudery) < 0){
+        y_offset = -1;
+    }
+
+    // If the intruder is on the robot
+    if( (_current_y - intrudery) == 0 && (_current_x - intruderx) == 0 ){
+        if( _current_x == _x_upperboundry){
+            x_offset = -2;
+        }
+        if( _current_x == _x_lowerboundry){
+            x_offset = +2;
+        }
+        if( _current_y == _y_upperboundry){
+            y_offset = -2;
+        }
+        if( _current_y == _y_lowerboundry){
+            y_offset = +2;
+        }
+    }
+
+
     temp_x = _current_x + x_offset;
     temp_y = _current_y + y_offset;
     //Check outer boundries
@@ -49,20 +141,11 @@ void SecurityBot::wanderMoveFunction(){
     if( (temp_y < _y_lowerboundry) || (temp_y > _y_upperboundry) ){
         temp_y = _current_y;
     }
+
     _current_x = temp_x;    // change the current x location
     _current_y = temp_y;    // change the current y location
-    
-    //Moving uses battery
+
     consumeBattery();
-
-}
-
-void SecurityBot::makeNoiseFunction(){
-    //Stuff about alarm
-}
-
-void SecurityBot::evadeMoveFunction(){
-    //Stuff about evade
 }
 
 void SecurityBot::findRechargeMoveFunction(){
